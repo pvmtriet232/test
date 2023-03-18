@@ -9,5 +9,5 @@ type Saiyan struct {
 }
 
 func (s *Saiyan) DescribeSaiyan() {
-	fmt.Printf("Name : %v, Powerlvl : %v, SSJ : %v", s.Name, s.Powerlvl, s.SSJ)
+	fmt.Printf("Name : %v, Powerlvl : %v, SSJ : %v \n", s.Name, s.Powerlvl, s.SSJ)
 }
