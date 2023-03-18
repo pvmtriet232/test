@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/pvmtriet232/test"
+	"github.com/pvmtriet232/test/models"
 )
 
 func main() {
-	fmt.Println(test.PriceCheck(4343))
+	goku := &models.Saiyan{"goku", 9001, true}
+	goku.DescribeSaiyan()
 }
