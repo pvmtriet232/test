@@ -1,10 +1,15 @@
 package main
 
 import (
-	"github.com/pvmtriet232/test/models"
+	"fmt"
+	"net/http"
 )
 
 func main() {
-	goku := &models.Saiyan{"goku", 9001, true}
-	goku.DescribeSaiyan()
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Hello, world!")
+	})
+
+	fmt.Println("Server listening on port 4000...")
+	http.ListenAndServe(":4000", nil)
 }
