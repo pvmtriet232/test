@@ -16,7 +16,7 @@ func main() {
 	defer db.Close()
 
 	// Execute SELECT query
-	rows, err := db.Query("SELECT * FROM table_name")
+	rows, err := db.Query("SELECT * FROM snippets")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -27,11 +27,13 @@ func main() {
 		var column1 string
 		var column2 string
 		var column3 string
-		err := rows.Scan(&column1, &column2, &column3)
+		var column4 string
+		var column5 string
+		err := rows.Scan(&column1, &column2, &column3, &column4, &column5)
 		if err != nil {
 			panic(err.Error())
 		}
-		fmt.Println(column1, column2, column3)
+		fmt.Println(column1, column2, column3, column4, column5)
 	}
 
 	// Check for any errors during iteration
