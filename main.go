@@ -1,15 +1,41 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
-	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello, world!")
-	})
+	// Establish database connection
+	db, err := sql.Open("mysql", "web:pass@/snippetbox?parseTime=true")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
 
-	fmt.Println("Server listening on port 4000...")
-	http.ListenAndServe(":4000", nil)
+	// Execute SELECT query
+	rows, err := db.Query("SELECT * FROM table_name")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer rows.Close()
+
+	// Iterate over the result set and display the rows
+	for rows.Next() {
+		var column1 string
+		var column2 string
+		var column3 string
+		err := rows.Scan(&column1, &column2, &column3)
+		if err != nil {
+			panic(err.Error())
+		}
+		fmt.Println(column1, column2, column3)
+	}
+
+	// Check for any errors during iteration
+	if err := rows.Err(); err != nil {
+		panic(err.Error())
+	}
 }
